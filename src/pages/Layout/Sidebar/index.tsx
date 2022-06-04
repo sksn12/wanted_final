@@ -4,6 +4,7 @@ import { CgProfile } from 'react-icons/cg'
 import { GoGraph } from 'react-icons/go'
 
 import styles from './sidebar.module.scss'
+import { Link } from 'react-router-dom'
 
 const SideBar = () => {
   return (
@@ -13,16 +14,24 @@ const SideBar = () => {
       </header>
       <ul>
         <li>
-          <CgProfile size='26px' color='grey' />
+          <Link to='/'>
+            <CgProfile size='26px' color='grey' />
+          </Link>
         </li>
         <li>
-          <RiMapPinLine size='26px' color='grey' />
+          <Link to='/map'>
+            <RiMapPinLine size='26px' color='grey' />
+          </Link>
         </li>
         <li>
-          <MdSearch size='26px' color='grey' />
+          <Link to='/serach'>
+            <MdSearch size='26px' color='grey' />
+          </Link>
         </li>
         <li>
-          <GoGraph size='26px' color='grey' />
+          <Link to='/graph'>
+            <GoGraph size='26px' color='grey' />
+          </Link>
         </li>
       </ul>
       {/* 뭘로 채울지 고민 */}

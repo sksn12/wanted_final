@@ -16,7 +16,24 @@
   .headerThemeBox {
     display: flex;
     flex-direction: row-reverse;
-    width: 30%;
+    align-items: center;
+    width: 20%;
+
+    .logOutBox {
+      @include flexbox.flexbox(center, center);
+      width: 36px;
+      height: 36px;
+      margin-left: 5px;
+      cursor: pointer;
+      border: 1px solid colors.$BODER;
+      border-radius: 50%;
+      transition: 500ms;
+
+      &:hover {
+        background-color: colors.$RED;
+        transform: rotate(-90deg);
+      }
+    }
 
     .toglelight {
       width: 52px;
