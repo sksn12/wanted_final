@@ -1,0 +1,47 @@
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/colors';
+
+.container {
+  @include flexbox.flexbox(0, center);
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 40px;
+  margin-top: 12px;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  .headerThemeBox {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 30%;
+
+    .toglelight {
+      width: 52px;
+      height: 32px;
+      padding: 2px;
+      background-color: colors.$BODER;
+      border-radius: 20px;
+
+      .togleBtnLight {
+        width: 30px;
+        height: 28px;
+        background-color: colors.$GRAYE;
+        border-radius: 50%;
+        transition: 500ms;
+      }
+
+      .togleBtnDark {
+        background-color: colors.$GRAY2;
+        transition: 500ms;
+        transform: translateX(18px);
+      }
+    }
+
+    .togleDark {
+      background-color: colors.$GRAY6;
+    }
+  }
+}

@@ -1,13 +1,13 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
+import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import reportWebVitals from './reportWebVitals'
 import './styles/index.scss'
-
-import Routes from './routes'
+import App from 'pages'
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnMount: false } },
@@ -20,7 +20,7 @@ root.render(
       <ReactQueryDevtools />
       <RecoilRoot>
         <BrowserRouter>
-          <Routes />
+          <App />
         </BrowserRouter>
       </RecoilRoot>
     </QueryClientProvider>

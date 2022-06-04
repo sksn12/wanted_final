@@ -1,0 +1,47 @@
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/colors';
+
+.container {
+  @include flexbox.flexbox(0, center);
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid colors.$BODER;
+
+  header {
+    margin-top: 30px;
+    cursor: pointer;
+    transition: 500ms;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  ul {
+    @include flexbox.flexbox(0, center);
+    flex-direction: column;
+    height: 50%;
+    overflow-y: auto;
+
+    li {
+      margin: 20px;
+      cursor: pointer;
+      transition: 300ms;
+
+      &:hover {
+        padding: 10px;
+        margin: 20px;
+        background-color: colors.$WHITE;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  footer {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 30px;
+    background-color: colors.$BODER;
+    border-radius: 50%;
+  }
+}
