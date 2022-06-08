@@ -4,7 +4,7 @@ import styles from './layout.module.scss'
 import SideBar from './Sidebar'
 import cx from 'classnames'
 import { useRecoilValue } from 'recoil'
-import { darkModeState } from 'states'
+import { darkModeState } from 'states/theme'
 
 const Layout = () => {
   const theme = useRecoilValue(darkModeState)

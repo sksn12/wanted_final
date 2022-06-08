@@ -2,6 +2,7 @@ import styles from './kakaoMap.module.scss'
 import { MouseEvent, useState, useEffect } from 'react'
 import { Map, MapMarker, MapTypeId, Roadview } from 'react-kakao-maps-sdk'
 import cx from 'classnames'
+import Loading from 'components/Loading'
 
 interface locationType {
   Lat: number
@@ -15,15 +16,16 @@ const KakaoMap = () => {
 
   const setMapType = (e: MouseEvent<HTMLButtonElement>) => {
     const newMapTypeId = e.currentTarget.dataset.target as unknown as kakao.maps.MapTypeId
-    setMapTypeId(newMapTypeId)
+    setMapTypeId((prev) => (prev === newMapTypeId ? undefined : newMapTypeId))
   }
 
   const onClickMapRoadViewCoords = (_: kakao.maps.Map, event: kakao.maps.event.MouseEvent) => {
-    setIsRoadView(true)
     setLocation({ Lat: event.latLng.getLat(), Lon: event.latLng.getLng() })
   }
 
-  console.log(isRoadView)
+  useEffect(() => {
+    setTimeout(() => setIsRoadView(true), 1500)
+  }, [location])
 
   return (
     <section className={styles.container}>
@@ -41,12 +43,10 @@ const KakaoMap = () => {
           center={{ lat: location.Lat, lng: location.Lon }}
           onClick={onClickMapRoadViewCoords}
         >
-          <MapMarker position={{ lat: location.Lat, lng: location.Lon }}>
-            <div className={styles.mapMarker}>현재 위치</div>
-          </MapMarker>
+          <MapMarker position={{ lat: location.Lat, lng: location.Lon }} />
           {mapTypeId && <MapTypeId type={mapTypeId} />}
         </Map>
-        {isRoadView && (
+        {isRoadView ? (
           <Roadview
             position={{
               lat: location.Lat,
@@ -55,6 +55,8 @@ const KakaoMap = () => {
             }}
             className={styles.roadView}
           />
+        ) : (
+          <Loading type='spin' color='#b5ccda' />
         )}
       </div>
     </section>
