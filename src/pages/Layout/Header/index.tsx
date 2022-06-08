@@ -8,6 +8,7 @@ import { loginState } from 'states/login'
 const Header = () => {
   const [theme, setTheme] = useRecoilState(darkModeState)
   const setLogin = useSetRecoilState(loginState)
+  // const params=useParamas
 
   const handleThemeClick = () => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))

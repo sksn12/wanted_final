@@ -2,13 +2,15 @@ import styles from './login.module.scss'
 import { AiOutlineCheckCircle, AiOutlineEyeInvisible, AiFillCheckCircle } from 'react-icons/ai'
 import { MdVisibility } from 'react-icons/md'
 import { HiInformationCircle } from 'react-icons/hi'
-import { useState, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react'
 import { emailCheck, loginVal } from 'utils/validation'
 import { loginState } from 'states/login'
 import { useSetRecoilState } from 'recoil'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const setLogin = useSetRecoilState(loginState)
+  const navigate = useNavigate()
 
   const [isIdVisible, setIsIdVisible] = useState(false)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
@@ -17,6 +19,10 @@ const Login = () => {
   const [password, setPassword] = useState('')
 
   const [loginFalse, setLoginFalse] = useState(false)
+
+  useEffect(() => {
+    if (sessionStorage.getItem('userId')) navigate('/')
+  }, [navigate])
 
   const handleVisible = () => {
     setIsPasswordVisible((prev) => !prev)
@@ -39,6 +45,7 @@ const Login = () => {
       if (loginVal(id, password)) {
         sessionStorage.setItem('userId', 'youngman')
         setLogin(sessionStorage.getItem('userId'))
+        navigate('/')
       } else setLoginFalse(true)
     }
   }

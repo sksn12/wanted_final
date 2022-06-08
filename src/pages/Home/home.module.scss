@@ -1,3 +1,7 @@
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/colors';
+
 .container {
-  position: relative;
+  @include flexbox.flexbox(center, center);
+  margin-top: 20px;
 }

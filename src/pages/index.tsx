@@ -16,7 +16,6 @@ const App = () => {
 
   useEffect(() => {
     if (!isLogin) navigate('login')
-    else navigate('/')
   }, [isLogin, navigate])
 
   return (
