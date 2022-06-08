@@ -1,5 +1,5 @@
 import styles from './kakaoMap.module.scss'
-import { MouseEvent, useState } from 'react'
+import { MouseEvent, useState, useEffect } from 'react'
 import { Map, MapMarker, MapTypeId, Roadview } from 'react-kakao-maps-sdk'
 import cx from 'classnames'
 
@@ -22,6 +22,8 @@ const KakaoMap = () => {
     setIsRoadView(true)
     setLocation({ Lat: event.latLng.getLat(), Lon: event.latLng.getLng() })
   }
+
+  console.log(isRoadView)
 
   return (
     <section className={styles.container}>
