@@ -1,11 +1,17 @@
 import styles from './kakaoMap.module.scss'
 import { MouseEvent, useState } from 'react'
 import { Map, MapMarker, MapTypeId, Roadview } from 'react-kakao-maps-sdk'
+import cx from 'classnames'
+
+interface locationType {
+  Lat: number
+  Lon: number
+}
 
 const KakaoMap = () => {
   const [mapTypeId, setMapTypeId] = useState<kakao.maps.MapTypeId>()
-  const [roadViewLat, setRoadViewLat] = useState<number | undefined>()
-  const [roadViewLon, setRoadViewLon] = useState<number | undefined>()
+  const [isRoadView, setIsRoadView] = useState(false)
+  const [location, setLocation] = useState<locationType>({ Lat: 37.409736856513, Lon: 126.71141316479 })
 
   const setMapType = (e: MouseEvent<HTMLButtonElement>) => {
     const newMapTypeId = e.currentTarget.dataset.target as unknown as kakao.maps.MapTypeId
@@ -13,8 +19,8 @@ const KakaoMap = () => {
   }
 
   const onClickMapRoadViewCoords = (_: kakao.maps.Map, event: kakao.maps.event.MouseEvent) => {
-    setRoadViewLat(event.latLng?.getLat() ?? 0)
-    setRoadViewLon(event.latLng?.getLng() ?? 0)
+    setIsRoadView(true)
+    setLocation({ Lat: event.latLng.getLat(), Lon: event.latLng.getLng() })
   }
 
   return (
@@ -29,20 +35,20 @@ const KakaoMap = () => {
       </div>
       <div className={styles.mapBox}>
         <Map
-          className={styles.mapWrapper}
-          center={{ lat: 37.409736856513, lng: 126.71141316479 }}
+          className={cx(styles.mapWrapper, { [styles.mapResize]: isRoadView })}
+          center={{ lat: location.Lat, lng: location.Lon }}
           onClick={onClickMapRoadViewCoords}
         >
-          <MapMarker position={{ lat: 37.409736856513, lng: 126.71141316479 }}>
-            <div className={styles.mapMarker}>자세한 번지 수 x</div>
+          <MapMarker position={{ lat: location.Lat, lng: location.Lon }}>
+            <div className={styles.mapMarker}>현재 위치</div>
           </MapMarker>
           {mapTypeId && <MapTypeId type={mapTypeId} />}
         </Map>
-        {roadViewLat && roadViewLon && (
+        {isRoadView && (
           <Roadview
             position={{
-              lat: roadViewLat,
-              lng: roadViewLon,
+              lat: location.Lat,
+              lng: location.Lon,
               radius: 50,
             }}
             className={styles.roadView}
