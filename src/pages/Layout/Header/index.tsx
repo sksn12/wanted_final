@@ -1,5 +1,5 @@
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { darkModeState } from 'states/theme'
+import { darkModeState } from 'states/layout'
 import styles from './header.module.scss'
 import cx from 'classnames'
 import { AiOutlineLogout } from 'react-icons/ai'

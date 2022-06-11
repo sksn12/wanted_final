@@ -21,7 +21,6 @@
     .main {
       height: 80%;
       margin: 10px 50px;
-      overflow-y: auto;
     }
   }
 }
@@ -30,4 +29,11 @@
   background-color: colors.$DARKBACKGOUND;
   background-image: none;
   transition: 500ms;
+}
+
+.dashBoardTure {
+  display: flex;
+  width: 80%;
+  height: 80%;
+  background-color: red;
 }

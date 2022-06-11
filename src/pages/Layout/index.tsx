@@ -4,21 +4,28 @@ import styles from './layout.module.scss'
 import SideBar from './Sidebar'
 import cx from 'classnames'
 import { useRecoilValue } from 'recoil'
-import { darkModeState } from 'states/theme'
+import { darkModeState, dashBoardState } from 'states/layout'
 
 const Layout = () => {
   const theme = useRecoilValue(darkModeState)
+  const dashBoard = useRecoilValue(dashBoardState)
 
   return (
     <section className={cx(styles.page, { [styles.pageDark]: theme === 'dark' })}>
-      <div className={styles.container}>
-        <SideBar />
-        <section>
-          <Header />
-          <section className={styles.main}>
-            <Outlet />
-          </section>
-        </section>
+      <div className={cx(styles.container, { [styles.dashBoardTure]: dashBoard })}>
+        {!dashBoard ? (
+          <>
+            <SideBar />
+            <section>
+              <Header />
+              <section className={styles.main}>
+                <Outlet />
+              </section>
+            </section>
+          </>
+        ) : (
+          <div />
+        )}
       </div>
     </section>
   )

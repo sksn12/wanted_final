@@ -5,12 +5,20 @@ import { GoGraph } from 'react-icons/go'
 
 import styles from './sidebar.module.scss'
 import { Link } from 'react-router-dom'
+import { useSetRecoilState } from 'recoil'
+import { dashBoardState } from 'states/layout'
 
 const SideBar = () => {
+  const setDashBoard = useSetRecoilState(dashBoardState)
+
+  const handleClick = () => {
+    setDashBoard((prev) => !prev)
+  }
+
   return (
     <nav className={styles.container}>
       <header>
-        <MdDashboard size='30px' />
+        <MdDashboard size='30px' onClick={handleClick} />
       </header>
       <ul>
         <li>
