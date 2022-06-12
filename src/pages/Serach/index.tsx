@@ -6,9 +6,11 @@ import Result from './Result'
 import styles from './serach.module.scss'
 import logo from 'assets/logo/NAVER_Logo_Green.png'
 import darkLogo from 'assets/logo/NAVER_Logo_White.png'
+import { SearchValueState } from 'states/search'
 
 const SerachPage = () => {
   const theme = useRecoilValue(darkModeState)
+  const searchItem = useRecoilValue(SearchValueState)
 
   return (
     <section className={cx(styles.container, { [styles.darkContainer]: theme === 'dark' })}>
@@ -22,7 +24,7 @@ const SerachPage = () => {
             )}
           </div>
           <Input />
-          <Result />
+          {searchItem.length > 0 && <Result />}
         </section>
       </div>
     </section>

@@ -1,11 +1,14 @@
 import styles from './input.module.scss'
 import { BiSearchAlt2 } from 'react-icons/bi'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { SearchValueState } from 'states/search'
-import { ChangeEvent, FormEvent } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
+import { getSearchData } from 'services/naverSearch'
+import { searchItemType } from 'types/search'
 
 const Input = () => {
-  const [content, setContent] = useRecoilState(SearchValueState)
+  const setSearchItem = useSetRecoilState(SearchValueState)
+  const [content, setContent] = useState('')
 
   const handleContentChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
@@ -14,7 +17,12 @@ const Input = () => {
 
   const handleSubmit = (e?: FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
-    console.log(content)
+    // 리액트 쿼리로 엔터말고 값이 변할때로 로직변경
+    getSearchData(content).then((item: searchItemType[]) => {
+      console.log(item)
+
+      setSearchItem(item)
+    })
   }
 
   const handleSubmitClick = () => {

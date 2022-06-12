@@ -86,5 +86,7 @@
     "stylelint-declaration-strict-value": "^1.8.0",
     "typescript": "^4.4.2",
     "webpack": "^5.72.1"
-  }
+  },
+  "proxy":"https://openapi.naver.com"
+
 }
