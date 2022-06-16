@@ -7,11 +7,13 @@ import styles from './serach.module.scss'
 import logo from 'assets/logo/NAVER_Logo_Green.png'
 import darkLogo from 'assets/logo/NAVER_Logo_White.png'
 import { SearchValueState } from 'states/search'
+// import { getAutoCompleteData } from 'services/naverSearch'
 
 const SerachPage = () => {
   const theme = useRecoilValue(darkModeState)
   const searchItem = useRecoilValue(SearchValueState)
 
+  // getAutoCompleteData().then((e) => console.log(e))
   return (
     <section className={cx(styles.container, { [styles.darkContainer]: theme === 'dark' })}>
       <div className={styles.search}>

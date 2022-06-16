@@ -32,7 +32,7 @@ const SideBar = () => {
           </Link>
         </li>
         <li>
-          <Link to='/serach'>
+          <Link to='/search'>
             <MdSearch size='26px' color='grey' />
           </Link>
         </li>
